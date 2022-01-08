@@ -64,3 +64,4 @@ The following properties can be set in the deployment configuration in %projectf
 | onDeployCopyEnvFile      | Copy *.env* to the devilbox dir                                                                                                                 |
 | onDeployAddHostsEntry    | Add or update an entry in *hosts* for the project. The domain name is %projectfolder%.loc, the IP can be configurated in the global config file |
 | onDeployCopyProjectFiles | copy all project files to devilbox dir                                                                                                          |
+| wholeProjectIsPublic | if the wholeProject is public, it will be deployed to %devilbox-dir%\data\www\%projectname%\htdocs otherwise it will be deployed to devilbox-dir%\data\www\%projectname%                                                                                                        |

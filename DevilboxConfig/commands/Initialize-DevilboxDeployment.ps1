@@ -48,6 +48,10 @@ function Initialize-DevilboxDeployment
 onDeployCopyEnvFile = True
 onDeployAddHostsEntry = True
 onDeployCopyProjectFiles = False
+
+#if the wholeProject is public, it will be deployed to %devilbox-dir%\data\www\%projectname%\htdocs (HTTPD_DOCROOT_DIR must be set to 'htdocs' too (that's the default value)).
+#Otherwise it will be deployed to %devilbox-dir%\data\www\%projectname%. 
+wholeProjectIsPublic = False
 "@
     $configTxt | Out-File  -FilePath "$deployFolder\config.txt"
 

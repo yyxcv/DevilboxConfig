@@ -49,36 +49,53 @@ if ($deployConfig["onDeployCopyProjectFiles"] -eq $true)
 {
     Write-Host "------ Copy Project Files ------`n"
     $source = (Split-Path $deployConfigPath -Parent)
-    $dest = "$devilboxPath\data\www"
+    $deployBasePath = "$devilboxPath\data\www"
+
+    if($deployConfig["wholeProjectIsPublic"] -eq $true)
+    {
+        $destination = "$deployBasePath\$projectName\htdocs"
+    }else{     
+        $destination = "$deployBasePath\$projectName"
+    }
 
     $abortCopyProjectFiles = $false
-    if (-Not(Test-Path "$dest"))
+    #test deployBasePath
+    if (-Not(Test-Path $deployBasePath))
     {
-        Write-Host "Folder ""$dest"" does not exist. Can not deploy project files. Abort."
+        Write-Host "Folder ""$deployBasePath"" does not exist. Can not deploy project files. Abort."
         $abortCopyProjectFiles = $true
     }
+    #remove old deployment
     if (-Not$abortCopyProjectFiles)
     {
-        if (Test-Path "$dest\$projectName")
+        if (Test-Path "$destination")
         {
-            Write-Host "Remove old project files  from $dest"
+            Write-Host "Remove old project files from $destination"
             try
             {
-                Remove-Item "$dest\$projectName" -Recurse -Force -ErrorAction Stop
+                Remove-Item "$destination" -Recurse -Force -ErrorAction Stop
             }
             catch
             {
-                Write-Host "Could not remove Folder ""$dest\$projectName"". Abort"
+                Write-Host "Could not remove Folder ""$destination"". Abort"
                 $abortCopyProjectFiles = $true
             }
         }
     }
+    #copy files
     if (-Not$abortCopyProjectFiles)
     {
         try
         {
-            Write-Host "Copy ""$source"" => ""$dest"""
-            Copy-Item "$source" -Destination "$dest" -Recurse -ErrorAction Stop
+            
+            if($deployConfig["wholeProjectIsPublic"] -eq $true){
+                Write-Host "Copy ""$source\*"" => ""$destination"""
+                New-Item "$destination" -ItemType Directory | Out-Null
+                Copy-Item "$source\*" -Destination "$destination" -Recurse -ErrorAction Stop
+            }else{
+                Write-Host "Copy ""$source"" => ""$deployBasePath"""
+                Copy-Item "$source" -Destination "$deployBasePath" -Recurse -ErrorAction Stop
+            }
         }
         catch
         {

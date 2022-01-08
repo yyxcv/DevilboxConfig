@@ -77,7 +77,7 @@ function validateDeployConfig
         [String]$configFilePath
     )
 
-    $requiredParam = @("onDeployCopyEnvFile", "onDeployAddHostsEntry", "onDeployCopyProjectFiles")
+    $requiredParam = @("onDeployCopyEnvFile", "onDeployAddHostsEntry", "onDeployCopyProjectFiles", "wholeProjectIsPublic")
 
     foreach ($parm in $requiredParam)
     {
