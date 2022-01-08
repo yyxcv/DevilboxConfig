@@ -8,8 +8,7 @@ param(
 
 Write-Host "> Set-Location $devilboxPath`n"
 Set-Location $devilboxPath
-
-if ($useDockerToolbox)
+if ($useDockerToolbox -eq $true)
 {
     if ((docker-machine status default) -eq "Stopped")
     {
