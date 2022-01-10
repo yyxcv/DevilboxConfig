@@ -77,8 +77,8 @@ Write-Host "Create inital config.txt"
 
 $configTxt = @"
 DevilboxPath = $("$env:userprofile\documents\devilbox".replace("\", "\\") )
-Ip = 192.168.99.100
-useDockerToolbox = True
+Ip = 127.0.0.1
+useDockerToolbox = False
 "@
 
 $configTxt | Out-File  -FilePath "$installFolder\DevilboxConfig\config.txt"
