@@ -27,7 +27,7 @@ Write-Host "`n> docker-compose stop`n"
 Write-Host "`n> docker-compose rm -f`n"
 & "docker-compose" rm -f
 
-Write-Host "`n> docker-compose up --detach httpd php bind`n"
-& "docker-compose" up --detach httpd php bind
+Write-Host "`n> docker-compose up --detach httpd php bind mysql`n"
+& "docker-compose" up --detach httpd php bind mysql
 
 Write-Host "`n"
