@@ -1,6 +1,6 @@
 # DevilboxConfig
 
-A PowerShell module to deploy multiple projects to devilbox.
+A PowerShell module I use to deploy multiple projects to devilbox.
 
 ## Installation
 
